@@ -8,7 +8,8 @@
     "develop": "nodemon src/index.js",
     "start": "node src/index.js",
     "lint": "eslint --format table './src/**/*.js'",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "repository": {
     "type": "git",
