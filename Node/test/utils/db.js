@@ -10,4 +10,8 @@ function createProductsDB(mockedProducts) {
     return schemas;
 }
 
-module.exports = { createProductsDB };
+function resetModel(model) {
+    delete mongoose.connection.models[model];
+}
+
+module.exports = { createProductsDB, resetModel };
