@@ -23,15 +23,16 @@ function init() {
 
         const schemas = schemasFactory.create(mongoose);
 
-        console.log('SSSSSSSChemas', schemas.Product);
-
         return {
             ...{
                 getConnection() {
                     return mongoose.connection;
                 },
                 connect() {
-                    return mongoose.connect(dbConnectionString);
+                    return mongoose.connect(dbConnectionString, {
+                        useNewUrlParser: true,
+                        useUnifiedTopology: true
+                    });
                 },
                 close() {
                     return mongoose.connection.close();
@@ -42,4 +43,12 @@ function init() {
     };
 }
 
-module.exports = { init };
+async function connect(db) {
+    try {
+        await db.connect();
+    } catch (error) {
+        await db.close();
+    }
+}
+
+module.exports = { init, connect };
