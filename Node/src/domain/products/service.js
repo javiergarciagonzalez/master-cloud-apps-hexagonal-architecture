@@ -1,10 +1,10 @@
 function init({ productsRepository }) {
-    async function getAllProducts() {
-        return productsRepository.getAllProducts();
-    }
-
     return {
-        getAllProducts
+        getAllProducts: () => productsRepository.getAllProducts(),
+        getProduct: (data) => productsRepository.getProduct(data),
+        createProduct: (data) => productsRepository.createProduct(data),
+        updateProduct: (data) => productsRepository.updateProduct(data),
+        deleteProduct: (data) => productsRepository.deleteProduct(data)
     };
 }
 

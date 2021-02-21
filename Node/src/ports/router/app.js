@@ -8,8 +8,6 @@ function init(services) {
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
 
-    console.log('--------_Services', services);
-
     app.use('/api/products', productRouter.init(services));
 
     return app;
