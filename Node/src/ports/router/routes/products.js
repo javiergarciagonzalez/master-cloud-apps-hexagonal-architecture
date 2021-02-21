@@ -1,5 +1,4 @@
 const express = require('express');
-
 const router = express.Router();
 
 function init({ productsService }) {
@@ -30,16 +29,12 @@ function init({ productsService }) {
         const productById = await productsService.getProduct({ id });
 
         if (!productById) {
-            const error = new Error(
-                `Sorry, product with id < ${id} > not found.`
-            );
+            const error = new Error(`Sorry, product with id < ${id} > not found.`);
             return next(error);
         }
 
         const { name, price } = req.body;
-
         const productToUpdate = { ...productById, name, price };
-
         const product = await productsService.updateProduct(productToUpdate);
 
         return res.send(product);
@@ -50,9 +45,7 @@ function init({ productsService }) {
         const product = await productsService.getProduct({ id });
 
         if (!product) {
-            const error = new Error(
-                `Sorry, product with id < ${id} > not found.`
-            );
+            const error = new Error(`Sorry, product with id < ${id} > not found.`);
             return next(error);
         }
 
