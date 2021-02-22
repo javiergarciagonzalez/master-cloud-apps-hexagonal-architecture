@@ -1,18 +1,13 @@
 const productRepositoryContainer = require('../../../src/adapters/repositories/productRepository');
-const { createProductsDB, resetModel } = require('../../utils/db');
+const { createProductsDB, resetModels } = require('../../utils/db');
 const mockedProducts = require('./mockedData/products');
 
 let productRepository;
-
 let schemas;
-
-function mockReturnValueOnce(functionToMock, value) {
-    functionToMock.mockReturnValue(value);
-}
 
 describe('Product repository tests', () => {
     beforeEach(() => {
-        resetModel('Product');
+        resetModels();
         schemas = createProductsDB(mockedProducts);
         productRepository = productRepositoryContainer.init(schemas);
 
@@ -28,7 +23,7 @@ describe('Product repository tests', () => {
             price: 42
         };
 
-        mockReturnValueOnce(schemas.Product.create, { ...product, _id });
+        schemas.Product.create.mockReturnValueOnce({ ...product, _id });
         const response = await productRepository.createProduct(product);
 
         expect(response.id).toBeDefined();
@@ -41,11 +36,10 @@ describe('Product repository tests', () => {
     });
 
     test('Should delete a product in the DB', async () => {
-        const product =
-            mockedProducts[Math.floor(Math.random() * mockedProducts.length)]; // get random mocked product
+        const product = mockedProducts[Math.floor(Math.random() * mockedProducts.length)]; // get random mocked product
 
-        mockReturnValueOnce(schemas.Product.deleteOne, { ok: 1 });
-        mockReturnValueOnce(schemas.Product.findOne, {
+        schemas.Product.deleteOne.mockReturnValueOnce({ ok: 1 });
+        schemas.Product.findOne.mockReturnValueOnce({
             ...product,
             _id: product.id
         });
@@ -61,12 +55,6 @@ describe('Product repository tests', () => {
         expect(schemas.Product.findOne).toHaveBeenCalledWith({
             _id: product.id
         });
-        expect(schemas.Product.deleteOne).toHaveBeenCalledWith(
-            { _id: product.id },
-            {
-                name: product.name,
-                price: product.price
-            }
-        );
+        expect(schemas.Product.deleteOne).toHaveBeenCalledWith({ _id: product.id });
     });
 });

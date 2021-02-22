@@ -5,7 +5,7 @@ const ProductsDomainModel = require('../../../domain/products/model');
 async function createShoppingCart() {
     try {
         const { ShoppingCart: shoppingCartSchema } = this.getSchemas();
-        const shoppingCart = await shoppingCartSchema.create({ products: [], status: 'started' });
+        const shoppingCart = await shoppingCartSchema.create({ items: [], status: 'started' });
 
         if (!shoppingCart) {
             throw new Error("Shopping cart couldn't been created.");
@@ -68,26 +68,6 @@ async function removeShoppingCart({ id }) {
     }
 }
 
-async function addProductToCart(product) {
-    try {
-        const { ShoppingCart: shoppingCartSchema } = this.getSchemas();
-
-        const shoppingCart = await shoppingCartSchema.find({});
-        if (!shoppingCarts) {
-            throw new Error('Not found: all shopping carts');
-        }
-
-        const queryResult = await shoppingCartSchema.updateOne({ _id: shoppingCart._id }, { $push: { products: product } });
-        if (!queryResult) {
-            throw new Error(`Couldn't add the product with name: ${product.name}.`);
-        }
-
-        return mapper.toDomainModel(queryResult, ShoppingCartDomainModel);
-    } catch (error) {
-        throw error;
-    }
-}
-
 async function addProductToShoppingCart({ shoppingCartId, productId, quantity }) {
     try {
         const { ShoppingCart: shoppingCartSchema, Product: productSchema } = this.getSchemas();
@@ -105,24 +85,26 @@ async function addProductToShoppingCart({ shoppingCartId, productId, quantity })
 
         const indexFound = shoppingCart.items.findIndex((item) => item.productId == productId);
 
+        const updatedShoppingCart = { items: [...shoppingCart.items], status: shoppingCart.status };
         if (indexFound !== -1 && quantity > 0) {
-            shoppingCart.items[indexFound].quantity += quantity;
+            updatedShoppingCart.items[indexFound].quantity += quantity;
         }
 
         if (indexFound === -1) {
-            shoppingCart.items.push({
+            updatedShoppingCart.items.push({
                 productId,
                 quantity
             });
         }
 
-        const result = await shoppingCartSchema.updateOne({ _id: shoppingCartId }, shoppingCart);
+        const result = await shoppingCartSchema.updateOne({ _id: shoppingCartId }, updatedShoppingCart);
 
         if (!result) {
             throw new Error(`Product with id: ${productId} was not added to shopping chart with id: ${shoppingCartId}`);
         }
 
-        return mapper.toDomainModel(result, ShoppingCartDomainModel);
+        console.log('========================', { ...updatedShoppingCart, _id: shoppingCartId });
+        return mapper.toDomainModel({ ...updatedShoppingCart, _id: shoppingCartId }, ShoppingCartDomainModel);
     } catch (error) {
         throw error;
     }
@@ -159,7 +141,9 @@ async function deleteProductFromShoppingCart({ shoppingCartId, productId }) {
             throw new Error(`Product with id: ${productId} was not added to shopping chart with id: ${shoppingCartId}`);
         }
 
-        return mapper.toDomainModel(result, ShoppingCartDomainModel);
+        console.log('bubuubu', mapper.toDomainModel(updatedShoppingCart, ShoppingCartDomainModel));
+
+        return mapper.toDomainModel(updatedShoppingCart, ShoppingCartDomainModel);
     } catch (error) {
         throw error;
     }

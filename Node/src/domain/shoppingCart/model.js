@@ -1,7 +1,7 @@
 class ShoppingCart {
-    constructor({ _id, products, status }) {
+    constructor({ _id, items, status }) {
         this.id = _id;
-        this.products = products;
+        this.items = items;
         this.status = status;
     }
 }

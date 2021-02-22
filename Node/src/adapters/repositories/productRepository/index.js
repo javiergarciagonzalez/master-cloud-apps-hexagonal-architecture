@@ -85,7 +85,7 @@ async function deleteProduct({ id }) {
             throw new Error(`Product with id: ${id} couldn't be removed.`);
         }
 
-        return mapper.toDomainModel({ _id: id, name, price }, ProductsDomainModel);
+        return mapper.toDomainModel({ _id: id, name: product.name, price: product.price }, ProductsDomainModel);
     } catch (error) {
         throw error;
     }

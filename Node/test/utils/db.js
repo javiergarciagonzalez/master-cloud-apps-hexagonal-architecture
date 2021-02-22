@@ -10,8 +10,18 @@ function createProductsDB(mockedProducts) {
     return schemas;
 }
 
-function resetModel(model) {
-    delete mongoose.connection.models[model];
+function createShoppingCartsDb(mockedShoppingCarts, mockedProducts) {
+    const schemas = schemasFactory.create(mongoose);
+    const db = { schemas };
+
+    new db.schemas.ShoppingCart(mockedShoppingCarts);
+    new db.schemas.Product(mockedProducts);
+
+    return schemas;
 }
 
-module.exports = { createProductsDB, resetModel };
+function resetModels() {
+    Object.keys(mongoose.connection.models).forEach((key) => delete mongoose.connection.models[key]);
+}
+
+module.exports = { createProductsDB, createShoppingCartsDb, resetModels };
