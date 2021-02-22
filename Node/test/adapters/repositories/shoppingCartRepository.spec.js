@@ -1,6 +1,5 @@
 const shoppingCartRepositoryContainer = require('../../../src/adapters/repositories/shoppingCartRepository');
 const { createShoppingCartsDb, resetModels } = require('../../utils/db');
-const mockedShoppingCarts = require('./mockedData/shoppingCarts');
 const mockedProducts = require('./mockedData/products');
 
 let shoppingCartRepository;
@@ -9,7 +8,7 @@ let schemas;
 describe('Product repository tests', () => {
     beforeEach(() => {
         resetModels();
-        schemas = createShoppingCartsDb(mockedShoppingCarts, mockedProducts);
+        schemas = createShoppingCartsDb(mockedProducts);
         shoppingCartRepository = shoppingCartRepositoryContainer.init(schemas);
 
         schemas.ShoppingCart.create = jest.fn();

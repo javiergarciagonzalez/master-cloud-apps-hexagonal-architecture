@@ -10,11 +10,11 @@ function createProductsDB(mockedProducts) {
     return schemas;
 }
 
-function createShoppingCartsDb(mockedShoppingCarts, mockedProducts) {
+function createShoppingCartsDb(mockedProducts) {
     const schemas = schemasFactory.create(mongoose);
     const db = { schemas };
 
-    new db.schemas.ShoppingCart(mockedShoppingCarts);
+    new db.schemas.ShoppingCart();
     new db.schemas.Product(mockedProducts);
 
     return schemas;
