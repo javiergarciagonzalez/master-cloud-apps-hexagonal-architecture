@@ -23,6 +23,25 @@ function init({ shoppingCartService }) {
         res.send(shoppingCart);
     });
 
+    router.delete('/:id', async (req, res) => {
+        const { id } = req.params;
+        const result = await shoppingCartService.removeShoppingCart({ id });
+
+        return res.send(result);
+    });
+
+    router.post('/:id/product/:productId/quantity/:quantity', async (req, res, next) => {
+        const { id: shoppingCartId, productId, quantity } = req.params;
+        const result = await shoppingCartService.addProductToShoppingCart({ shoppingCartId, productId, quantity: parseInt(quantity, 10) });
+        return res.send(result);
+    });
+
+    router.delete('/:id/product/:productId', async (req, res, next) => {
+        const { id: shoppingCartId, productId } = req.params;
+        const result = await shoppingCartService.deleteProductFromShoppingCart({ shoppingCartId, productId });
+        return res.send(result);
+    });
+
     return router;
 }
 

@@ -1,5 +1,5 @@
 const mapper = require('../../mapper');
-const ProductDomainModel = require('../../../domain/products/model');
+const ProductsDomainModel = require('../../../domain/products/model');
 
 async function getAllProducts() {
     try {
@@ -11,7 +11,7 @@ async function getAllProducts() {
             throw new Error('Not found: all products');
         }
 
-        return products.map((product) => mapper.toDomainModel(product, ProductDomainModel));
+        return products.map((product) => mapper.toDomainModel(product, ProductsDomainModel));
     } catch (error) {
         throw error;
     }
@@ -27,7 +27,7 @@ async function getProduct({ id }) {
             throw new Error(`Product with id ${id} not found.`);
         }
 
-        return mapper.toDomainModel(product, ProductDomainModel);
+        return mapper.toDomainModel(product, ProductsDomainModel);
     } catch (error) {
         throw error;
     }
@@ -41,7 +41,7 @@ async function createProduct({ name, price }) {
         if (!product) {
             throw new Error(`Product with id ${id} not found.`);
         }
-        return mapper.toDomainModel(product, ProductDomainModel);
+        return mapper.toDomainModel(product, ProductsDomainModel);
     } catch (error) {
         throw error;
     }
@@ -63,13 +63,13 @@ async function updateProduct({ id, name, price }) {
             throw new Error(`Product with id: ${id} couldn't be updated.`);
         }
 
-        return mapper.toDomainModel({ _id: id, name, price }, ProductDomainModel);
+        return mapper.toDomainModel({ _id: id, name, price }, ProductsDomainModel);
     } catch (error) {
         throw error;
     }
 }
 
-async function deleteProduct({ id, name, price }) {
+async function deleteProduct({ id }) {
     const { Product: productSchema } = this.getSchemas();
 
     try {
@@ -79,13 +79,13 @@ async function deleteProduct({ id, name, price }) {
             throw new Error(`Product with id ${id} not found.`);
         }
 
-        const { ok } = await productSchema.deleteOne({ _id: product._id }, { name, price });
+        const { ok } = await productSchema.deleteOne({ _id: product._id });
 
         if (!ok) {
-            throw new Error(`Product with id: ${id} couldn't be updated.`);
+            throw new Error(`Product with id: ${id} couldn't be removed.`);
         }
 
-        return mapper.toDomainModel({ _id: id, name, price }, ProductDomainModel);
+        return mapper.toDomainModel({ _id: id, name, price }, ProductsDomainModel);
     } catch (error) {
         throw error;
     }

@@ -3,16 +3,9 @@ function validateOrder(order) {
     return Math.random() < 0.5;
 }
 
-const orderValidatorStore = {
-    validateOrder
-};
-
-function init({ OrderValidator }) {
+function init() {
     return {
-        ...orderValidatorStore,
-        getSchemas() {
-            return { OrderValidator };
-        }
+        validateOrder
     };
 }
 

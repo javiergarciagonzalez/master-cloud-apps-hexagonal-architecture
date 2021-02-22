@@ -1,7 +1,7 @@
-const create = (mongoose) => {
+const create = (mongoose, ShoppingCartItem) => {
     const shoppingCartSchema = mongoose.Schema({
-        products: {
-            type: Array,
+        items: {
+            type: [ShoppingCartItem],
             default: [],
             required: true
         },

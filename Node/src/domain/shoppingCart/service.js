@@ -1,12 +1,11 @@
-function init({ shoppingCartRepository }) {
+function init({ shoppingCartRepository, orderValidatorRepository }) {
     return {
         createShoppingCart: () => shoppingCartRepository.createShoppingCart(),
-        finishShoppingCart: (data) => shoppingCartRepository.finishShoppingCart(data),
+        finishShoppingCart: (data) => shoppingCartRepository.finishShoppingCart(data, orderValidatorRepository),
         getShoppingCart: (data) => shoppingCartRepository.getShoppingCart(data),
-        addProductToCart: (product) => shoppingCartRepository.addProductToCart(product),
-        removeProductFromCart: (product) => shoppingCartRepository.removeProductFromCart(product),
-        removeCart: (product) => shoppingCartRepository.removeCart(product),
-        finishCart: (product) => shoppingCartRepository.finishCart(product)
+        removeShoppingCart: (data) => shoppingCartRepository.removeShoppingCart(data),
+        addProductToShoppingCart: (data) => shoppingCartRepository.addProductToShoppingCart(data),
+        deleteProductFromShoppingCart: (data) => shoppingCartRepository.deleteProductFromShoppingCart(data)
     };
 }
 
