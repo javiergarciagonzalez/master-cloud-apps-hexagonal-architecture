@@ -1,9 +1,8 @@
 require('dotenv').config();
 
 const config = {
-    serverPort: process.env.SERVER_PORT || 8080,
-    dbConnectionString:
-        process.env.DATABASE_URL || 'mongodb://localhost:27017/shop'
+    serverPort: process.env.SERVER_PORT,
+    dbConnectionString: process.env.DATABASE_URL
 };
 
 module.exports = config;

@@ -7,6 +7,7 @@ const create = (mongoose, ShoppingCartItem) => {
         },
         status: {
             type: String,
+            default: 'started',
             required: true
         }
     });

@@ -1,4 +1,4 @@
-const productRepositoryContainer = require('../../../src/adapters/repositories/productRepository');
+const productRepositoryContainer = require('../../../src/repositories/productRepository');
 const { createProductsDB, resetModels } = require('../../utils/db');
 const mockedProducts = require('./mockedData/products');
 

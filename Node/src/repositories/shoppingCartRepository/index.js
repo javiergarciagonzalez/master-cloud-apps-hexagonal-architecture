@@ -1,11 +1,11 @@
 const mapper = require('../../mapper');
-const ShoppingCartDomainModel = require('../../../domain/shoppingCart/model');
-const ProductsDomainModel = require('../../../domain/products/model');
+const ShoppingCartDomainModel = require('../../domain/shoppingCart/model');
+const ProductsDomainModel = require('../../domain/products/model');
 
 async function createShoppingCart() {
     try {
         const { ShoppingCart: shoppingCartSchema } = this.getSchemas();
-        const shoppingCart = await shoppingCartSchema.create({ items: [], status: 'started' });
+        const shoppingCart = await shoppingCartSchema.create({});
 
         if (!shoppingCart) {
             throw new Error("Shopping cart couldn't been created.");

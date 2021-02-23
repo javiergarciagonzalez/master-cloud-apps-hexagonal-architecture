@@ -1,4 +1,4 @@
-const shoppingCartRepositoryContainer = require('../../../src/adapters/repositories/shoppingCartRepository');
+const shoppingCartRepositoryContainer = require('../../../src/repositories/shoppingCartRepository');
 const { createShoppingCartsDb, resetModels } = require('../../utils/db');
 const mockedProducts = require('./mockedData/products');
 
