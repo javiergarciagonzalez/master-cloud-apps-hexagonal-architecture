@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const schemasFactory = require('../../src/adapters/infrastructure/db/schemas');
+const schemasFactory = require('../../src/infrastructure/db/schemas');
 
 function createProductsDB(mockedProducts) {
     const schemas = schemasFactory.create(mongoose);

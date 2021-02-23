@@ -1,5 +1,5 @@
 const mapper = require('../../mapper');
-const ProductsDomainModel = require('../../../domain/products/model');
+const ProductsDomainModel = require('../../domain/products/model');
 
 async function getAllProducts() {
     try {

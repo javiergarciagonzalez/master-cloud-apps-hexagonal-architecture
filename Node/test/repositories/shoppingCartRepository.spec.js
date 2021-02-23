@@ -1,5 +1,5 @@
-const shoppingCartRepositoryContainer = require('../../../src/adapters/repositories/shoppingCartRepository');
-const { createShoppingCartsDb, resetModels } = require('../../utils/db');
+const shoppingCartRepositoryContainer = require('../../src/repositories/shoppingCartRepository');
+const { createShoppingCartsDb, resetModels } = require('../utils/db');
 const mockedProducts = require('./mockedData/products');
 
 let shoppingCartRepository;
@@ -33,7 +33,7 @@ describe('Product repository tests', () => {
         expect(response.id).toBe(_id);
         expect(response.items).toBe(shoppingCart.items);
         expect(response.status).toBe(shoppingCart.status);
-        expect(schemas.ShoppingCart.create).toHaveBeenCalledWith(shoppingCart);
+        expect(schemas.ShoppingCart.create).toHaveBeenCalledWith({});
     });
 
     test('Should add a new product to an existing shopping cart in the DB', async () => {
@@ -66,7 +66,7 @@ describe('Product repository tests', () => {
         expect(responseCreate.id).toBe(_id);
         expect(responseCreate.items).toEqual(shoppingCart.items);
         expect(responseCreate.status).toBe(shoppingCart.status);
-        expect(schemas.ShoppingCart.create).toHaveBeenCalledWith(shoppingCart);
+        expect(schemas.ShoppingCart.create).toHaveBeenCalledWith({});
 
         expect(responseUpdateOne.id).toBeDefined();
         expect(responseUpdateOne.items).toBeDefined();

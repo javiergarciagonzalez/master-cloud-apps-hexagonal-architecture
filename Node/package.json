@@ -15,7 +15,11 @@
     "type": "git",
     "url": "https://github.com/javiergarciagonzalez/master-cloud-apps-hexagonal-architecture/Node"
   },
-  "keywords": ["nodejs", "hexagonal-architecture", "clean-architecture"],
+  "keywords": [
+    "nodejs",
+    "hexagonal-architecture",
+    "clean-architecture"
+  ],
   "author": "Javier Garcia Gonzalez <javier@garciagon.com>",
   "license": "ISC",
   "dependencies": {

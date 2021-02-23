@@ -1,18 +1,18 @@
 const { serverPort } = require('../config');
 const { dbConnectionString } = require('../config');
 
-const initAppContainer = require('../ports/router/app');
+const initAppContainer = require('../router/app');
 
-const productsRepositoryContainer = require('../adapters/repositories/productRepository');
+const productsRepositoryContainer = require('../repositories/productRepository');
 const productsServiceContainer = require('../domain/products/service');
 
-const shoppingCartRepositoryContainer = require('../adapters/repositories/shoppingCartRepository');
+const shoppingCartRepositoryContainer = require('../repositories/shoppingCartRepository');
 const shoppingCartServiceContainer = require('../domain/shoppingCart/service');
 
-const orderValidatorRepositoryContainer = require('../adapters/repositories/orderValidatorRepository');
+const orderValidatorRepositoryContainer = require('../repositories/orderValidatorRepository');
 const orderValidatorServiceContainer = require('../domain/orderValidator/service');
 
-const { init: initDB, connect: connectDB } = require('../adapters/infrastructure/db');
+const { init: initDB, connect: connectDB } = require('../infrastructure/db');
 
 const db = initDB()({ dbConnectionString });
 
@@ -21,8 +21,8 @@ const shoppingCartRepository = shoppingCartRepositoryContainer.init(db.schemas);
 const orderValidatorRepository = orderValidatorRepositoryContainer.init();
 
 const productsService = productsServiceContainer.init({ productsRepository });
-const orderValidatorService = orderValidatorServiceContainer.init({ orderValidatorRepository });
 const shoppingCartService = shoppingCartServiceContainer.init({ shoppingCartRepository, orderValidatorRepository });
+const orderValidatorService = orderValidatorServiceContainer.init({ orderValidatorRepository });
 
 const services = { productsService, shoppingCartService, orderValidatorService };
 
