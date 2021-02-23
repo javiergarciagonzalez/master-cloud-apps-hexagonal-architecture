@@ -1,0 +1,230 @@
+{
+	"info": {
+		"_postman_id": "40dba83c-e0aa-4b33-8b60-2ace82da078b",
+		"name": "hexagonalArquitechture",
+		"description": "Ejemplos para la practica de aquitectura hexagonal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Muestra los productos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/products/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"products",
+						""
+					]
+				},
+				"description": "Muestra los productos"
+			},
+			"response": []
+		},
+		{
+			"name": "Añade un producto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Product02\",\n    \"description\": \"Description02\",\n    \"category\": \"Category02\",\n    \"manufacturer\": \"Manufacturer02\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/products/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"products",
+						""
+					]
+				},
+				"description": "Añade un producto"
+			},
+			"response": []
+		},
+		{
+			"name": "Muestra un producto en específico",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/products/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"products",
+						"1"
+					]
+				},
+				"description": "Muestra un producto en específico"
+			},
+			"response": []
+		},
+		{
+			"name": "Borra un producto en específico",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/products/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"products",
+						"1"
+					]
+				},
+				"description": "Borra un producto en específico"
+			},
+			"response": []
+		},
+		{
+			"name": "Crea un carrito de compra",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/shoppingcarts",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"shoppingcarts"
+					]
+				},
+				"description": "Crea un carrito de compra"
+			},
+			"response": []
+		},
+		{
+			"name": "Modifica el carrito de compra para pasar el estado a completo (finalizar el carrito)",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/shoppingcarts/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"shoppingcarts",
+						"1"
+					]
+				},
+				"description": "Modifica el carrito de compra para pasar el estado a completo (finalizar el carrito)"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtiene un carrito de compra específico",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/shoppingcarts/2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"shoppingcarts",
+						"2"
+					]
+				},
+				"description": "Obtiene un carrito de compra específico"
+			},
+			"response": []
+		},
+		{
+			"name": "Añade un producto al carrito de compra, en la cantidad indicada",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/shoppingcarts/2/product/1/quantity/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"shoppingcarts",
+						"2",
+						"product",
+						"1",
+						"quantity",
+						"1"
+					]
+				},
+				"description": "Añade un producto al carrito de compra, en la cantidad indicada"
+			},
+			"response": []
+		},
+		{
+			"name": "Borra un producto específico de un carrito de compra",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/shoppingcarts/2/product/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"shoppingcarts",
+						"2",
+						"product",
+						"1"
+					]
+				},
+				"description": "Borra un producto específico de un carrito de compra"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080"
+		}
+	]
+}
