@@ -79,18 +79,22 @@ async function addProductToShoppingCart({ shoppingCartId, productId, quantity })
 
         const shoppingCart = await shoppingCartSchema.findOne({ _id: shoppingCartId });
 
+        if (shoppingCart.status === 'finished') {
+            throw new Error(`Product with id: ${productId} couldn't be added to a finished shopping cart with id: ${shoppingCartId}`);
+        }
+
         if (!shoppingCart) {
             throw new Error(`Product with id: ${productId} couldn't been added to a not found shopping cart with id: ${shoppingCartId}`);
         }
 
-        const indexFound = shoppingCart.items.findIndex((item) => item.productId == productId);
+        const productIndexInCart = shoppingCart.items.findIndex((item) => item.productId == productId);
 
         const updatedShoppingCart = { items: [...shoppingCart.items], status: shoppingCart.status };
-        if (indexFound !== -1 && quantity > 0) {
-            updatedShoppingCart.items[indexFound].quantity += quantity;
+        if (productIndexInCart !== -1 && quantity > 0) {
+            updatedShoppingCart.items[productIndexInCart].quantity += quantity;
         }
 
-        if (indexFound === -1) {
+        if (productIndexInCart === -1) {
             updatedShoppingCart.items.push({
                 productId,
                 quantity
@@ -103,7 +107,6 @@ async function addProductToShoppingCart({ shoppingCartId, productId, quantity })
             throw new Error(`Product with id: ${productId} was not added to shopping chart with id: ${shoppingCartId}`);
         }
 
-        console.log('========================', { ...updatedShoppingCart, _id: shoppingCartId });
         return mapper.toDomainModel({ ...updatedShoppingCart, _id: shoppingCartId }, ShoppingCartDomainModel);
     } catch (error) {
         throw error;
@@ -120,6 +123,10 @@ async function deleteProductFromShoppingCart({ shoppingCartId, productId }) {
         }
 
         const shoppingCart = await shoppingCartSchema.findOne({ _id: shoppingCartId });
+
+        if (shoppingCart.status === 'finished') {
+            throw new Error(`Product with id: ${productId} couldn't be added to a finished shopping cart with id: ${shoppingCartId}`);
+        }
 
         if (!shoppingCart) {
             throw new Error(`Product with id: ${productId} couldn't been added to a not found shopping cart with id: ${shoppingCartId}`);
@@ -140,8 +147,6 @@ async function deleteProductFromShoppingCart({ shoppingCartId, productId }) {
         if (!result) {
             throw new Error(`Product with id: ${productId} was not added to shopping chart with id: ${shoppingCartId}`);
         }
-
-        console.log('bubuubu', mapper.toDomainModel(updatedShoppingCart, ShoppingCartDomainModel));
 
         return mapper.toDomainModel(updatedShoppingCart, ShoppingCartDomainModel);
     } catch (error) {
