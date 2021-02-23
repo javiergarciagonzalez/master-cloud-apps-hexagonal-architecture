@@ -43,11 +43,11 @@ public class ProductEntity {
 
     public static ProductEntity fromFullProductDto(FullProductDto FullProductDto) {
         return new ProductEntity(
-                FullProductDto.getId(),
-                FullProductDto.getName(),
-                FullProductDto.getDescription(),
-                FullProductDto.getCategory(),
-                FullProductDto.getManufacturer());
+            FullProductDto.getId(),
+            FullProductDto.getName(),
+            FullProductDto.getDescription(),
+            FullProductDto.getCategory(),
+            FullProductDto.getManufacturer());
     }
 
     public Long getId() {

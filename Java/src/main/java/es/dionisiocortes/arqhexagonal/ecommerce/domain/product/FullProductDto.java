@@ -27,19 +27,19 @@ public class FullProductDto {
 
     public static FullProductDto fromProductDto(ProductDto product) {
         return new FullProductDto(
-                product.getName(),
-                product.getDescription(),
-                product.getCategory(),
-                product.getManufacturer());
+            product.getName(),
+            product.getDescription(),
+            product.getCategory(),
+            product.getManufacturer());
     }
 
     public static FullProductDto fromProductEntity(ProductEntity productEntity) {
         return new FullProductDto(
-                productEntity.getId(),
-                productEntity.getName(),
-                productEntity.getDescription(),
-                productEntity.getCategory(),
-                productEntity.getManufacturer());
+            productEntity.getId(),
+            productEntity.getName(),
+            productEntity.getDescription(),
+            productEntity.getCategory(),
+            productEntity.getManufacturer());
     }
 
     public Long getId() {

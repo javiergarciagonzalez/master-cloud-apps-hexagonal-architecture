@@ -41,13 +41,13 @@ public class CartItemEntity {
 
     public static CartItemDto toCartItemDto(CartItemEntity cartItemEntity) {
         return new CartItemDto(
-                FullProductDto.fromProductEntity(cartItemEntity.getProductEntity()),
-                cartItemEntity.getProductNumber());
+            FullProductDto.fromProductEntity(cartItemEntity.getProductEntity()),
+            cartItemEntity.getProductNumber());
     }
 
     public static CartItemEntity fromCartItemDto(CartItemDto cartItemDto) {
         return new CartItemEntity(ProductEntity.fromFullProductDto(cartItemDto.getProduct()),
-                cartItemDto.getProductNumber());
+            cartItemDto.getProductNumber());
     }
 
     public Long getId() {

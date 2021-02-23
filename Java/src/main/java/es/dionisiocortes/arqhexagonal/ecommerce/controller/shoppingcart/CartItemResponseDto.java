@@ -16,6 +16,12 @@ public class CartItemResponseDto {
         this.productNumber = productNumber;
     }
 
+    public static CartItemResponseDto fromCartItemDto(CartItemDto cartItemDto) {
+        return new CartItemResponseDto(
+            cartItemDto.getProduct(),
+            cartItemDto.getProductNumber());
+    }
+
     public FullProductDto getProductId() {
         return fullProduct;
     }
@@ -30,11 +36,5 @@ public class CartItemResponseDto {
 
     public void setProductNumber(int productNumber) {
         this.productNumber = productNumber;
-    }
-
-    public static CartItemResponseDto fromCartItemDto(CartItemDto cartItemDto) {
-        return new CartItemResponseDto(
-                cartItemDto.getProduct(),
-                cartItemDto.getProductNumber());
     }
 }

@@ -22,10 +22,10 @@ public class ProductService {
 
     public Collection<ProductResponseDto> findAll() {
         return productUseCase
-                .findAllProducts()
-                .stream()
-                .map(ProductResponseDto::fromFullProductDto)
-                .collect(Collectors.toList());
+            .findAllProducts()
+            .stream()
+            .map(ProductResponseDto::fromFullProductDto)
+            .collect(Collectors.toList());
     }
 
     public Optional<ProductResponseDto> findById(Long id) {

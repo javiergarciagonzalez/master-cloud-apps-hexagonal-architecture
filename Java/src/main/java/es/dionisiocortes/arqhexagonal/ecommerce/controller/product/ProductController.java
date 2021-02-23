@@ -49,14 +49,14 @@ public class ProductController {
         FullProductDto fullProductDto = productService.save(product);
 
         ProductResponseDto responseBookDto = new ProductResponseDto(
-                fullProductDto.getId(),
-                fullProductDto.getName(),
-                fullProductDto.getDescription(),
-                fullProductDto.getCategory(),
-                fullProductDto.getManufacturer());
+            fullProductDto.getId(),
+            fullProductDto.getName(),
+            fullProductDto.getDescription(),
+            fullProductDto.getCategory(),
+            fullProductDto.getManufacturer());
 
         URI location = fromCurrentRequest().path("/{id}")
-                .buildAndExpand(fullProductDto.getId()).toUri();
+            .buildAndExpand(fullProductDto.getId()).toUri();
 
         return ResponseEntity.created(location).body(responseBookDto);
     }

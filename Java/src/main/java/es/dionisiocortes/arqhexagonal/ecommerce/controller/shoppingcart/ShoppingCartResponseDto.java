@@ -25,9 +25,9 @@ public class ShoppingCartResponseDto {
         List<CartItemResponseDto> items = fullShoppingCartDto.getItems().stream().map(CartItemResponseDto::fromCartItemDto).collect(Collectors.toList());
 
         return new ShoppingCartResponseDto(
-                fullShoppingCartDto.getId(),
-                items,
-                fullShoppingCartDto.isFinished());
+            fullShoppingCartDto.getId(),
+            items,
+            fullShoppingCartDto.isFinished());
     }
 
     public Long getId() {

@@ -1,7 +1,6 @@
 package es.dionisiocortes.arqhexagonal.ecommerce.controller.shoppingcart;
 
 import es.dionisiocortes.arqhexagonal.ecommerce.domain.shoppingcart.FullShoppingCartDto;
-import es.dionisiocortes.arqhexagonal.ecommerce.service.ProductService;
 import es.dionisiocortes.arqhexagonal.ecommerce.service.ShoppingCartNotFoundExceptionService;
 import es.dionisiocortes.arqhexagonal.ecommerce.service.ShoppingCartService;
 import es.dionisiocortes.arqhexagonal.ecommerce.service.ShoppingCartValidationExceptionService;
@@ -17,11 +16,9 @@ import java.util.Optional;
 public class ShoppingCartController {
 
     private ShoppingCartService shoppingCartService;
-    private ProductService productService;
 
-    public ShoppingCartController(ShoppingCartService shoppingCartService, ProductService productService) {
+    public ShoppingCartController(ShoppingCartService shoppingCartService) {
         this.shoppingCartService = shoppingCartService;
-        this.productService = productService;
     }
 
     @PostMapping("/shoppingcarts")
